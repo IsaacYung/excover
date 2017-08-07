@@ -1,6 +1,5 @@
 defmodule ExCoverTest do
 	use ExUnit.Case
-
 	alias ExCover.Task
 
 	test "coveralls wished?" do
