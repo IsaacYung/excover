@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Elixir.ExCover.Source</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/source.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+  </head>
+
+  <body>
+    <div id="content">
+      <h1>Elixir.ExCover.Source Coverage Source Code</h1>
+
+      <table class="source">
+        <thead>
+          <tr>
+            <th>Line Number</th><th>Covered Lines</th><th>Source Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="source"><td class="num"> 1</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source"></a>
+    
+    <pre class="irrelevant">defmodule ExCover.Source do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 2</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @moduledoc """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 3</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  This module provides access to the source code the system to be analyzed.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 4</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 5</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 6</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  require Logger
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 7</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 8</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @type symbol :: :atom
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 9</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @type filename :: String.t
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 10</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @type line_pairs :: %{symbol =&gt; pos_integer}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 11</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @type modules :: %{symbol =&gt; line_pairs}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 12</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @type line_entries :: %{pos_integer =&gt; {pos_integer | nil, binary | nil}}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 13</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @type source_file :: %{name: String.t, source: String.t, coverage: [pos_integer | nil]}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 14</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @type lines :: {pos_integer, pos_integer | nil}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 15</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 16</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec analyze_to_html(symbol) :: {line_entries, binary}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 17</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  def analyze_to_html(mod) when is_atom(mod) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 18</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    Logger.debug("analyze_to_html of module #{inspect mod}")
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 19</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    {quoted, source} = get_quoted_source(mod)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 20</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    mods = find_all_mods_and_funs(quoted)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 21</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    if mod == Observable.PID, do:
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 22</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">      Logger.debug("Mods and funs found: #{inspect mods}")
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 23</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    {:ok, cover} = :cover.analyse(mod, :calls, :line)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 24</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    ## cover is [{{mod, line}, count}]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 25</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # cover |&gt; Enum.each &amp;Logger.info/1
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 26</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    {generate_lines(cover, mods[mod]), source}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 27</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 28</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 29</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 30</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  Returns the coverall data for the list of mods as Elixir datastructure.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 31</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  This can be encoded as JSON for uploading to coveralls.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 32</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 33</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec coveralls_data([symbol]) :: [source_file]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 34</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.coveralls_data.1"></a>
+    
+    <pre class="irrelevant">  def coveralls_data(mods) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 35</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    mc = mods |&gt; Enum.map(fn(mod) -&gt; {mod, cover_per_mod(mod)} end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 36</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    sources_and_lines(mc) |&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 37</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">      Enum.reduce([], fn({path, cover}, acc) -&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 38</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">        [%{:name =&gt; filter_cwd_prefix(path),
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 39</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">          :source =&gt; File.read!(path),
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 40</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">          :coverage =&gt; cover |&gt; lines_to_list} | acc]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 41</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 42</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 43</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 44</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc "Strips the current directory from the path"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 45</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.filter_cwd_prefix.1"></a>
+    
+    <pre class="irrelevant">  def filter_cwd_prefix(path) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 46</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    Path.relative_to_cwd(path)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 47</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 48</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 49</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 50</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  This function aggregates the coverage information per module to a coverage
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 51</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  information per source file.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 52</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 53</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  Takes a list of modules and determines the list of corresponding filenames.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 54</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  Returns to each filename a map of coverage information for the entire file.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 55</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 56</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec sources_and_lines([{symbol, [lines]}]) :: [{filename, line_entries}]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 57</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.sources_and_lines.1"></a>
+    
+    <pre class="irrelevant">  def sources_and_lines(mods) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 58</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # identify all modules of a source file
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 59</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # mod_files is %{path =&gt; [symbol]}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 60</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    mod_files = mods |&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 61</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">      Enum.map(fn({mod, lines}) -&gt; {mod, get_source_path(mod), lines} end) |&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 62</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      Enum.reduce(%{}, fn({m, p, l}, acc) -&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 63</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">        Map.update(acc, p, [{m, l}], fn(old) -&gt; [{m, l} | old] end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 64</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 65</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # for each source file, grab all coverage information on line basis,
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 66</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # merge them for all modules and fill up any leaks with nils
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 67</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    mod_files |&gt; Enum.map(fn({path, mods}) -&gt; {path, merge_coverage(mods)} end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 68</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 69</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 70</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 71</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  Gets a list of all modules within one sourcefile. Calculates the coverage
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 72</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  data for each module and merges them together. Returns a mapping of line number
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 73</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  to coverage data for the entire source file. Guarantees that all line numbers up
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 74</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  to the maximun reached line are filled in.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 75</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 76</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec merge_coverage([{symbol, lines}]) :: line_entries
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 77</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.merge_coverage.1"></a>
+    
+    <pre class="irrelevant">  def merge_coverage(mods) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 78</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    unmerged = mods |&gt; Enum.map(fn({_mod, lines}) -&gt; lines end) |&gt; List.flatten
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 79</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # unmerged is [{line, count}]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 80</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    merged = unmerged |&gt; Enum.reduce(%{}, fn ({line, count}, acc) -&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 81</td>
+  <td class="num">11</td>
+  <td class="elixir">
+    
+    <pre class="covered">      Map.update(acc, line, count,
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 82</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">        fn(nil) -&gt; count
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 83</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">           (c)  -&gt; count + c end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 84</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 85</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # fill all gaps with nil
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 86</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    max_lines = merged |&gt; Map.keys |&gt; Enum.max
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 87</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    1..max_lines |&gt; Enum.reduce(merged, fn(index, acc) -&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 88</td>
+  <td class="num">15</td>
+  <td class="elixir">
+    
+    <pre class="covered">      Map.put_new(acc, index, nil) end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 89</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 90</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 91</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec lines_to_list(line_entries) :: [pos_integer | nil]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 92</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.lines_to_list.1"></a>
+    
+    <pre class="irrelevant">  def lines_to_list(lines) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 93</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    lines
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 94</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    |&gt; Enum.sort(fn({l1, _}, {l2, _}) -&gt; l1 &lt;= l2 end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 95</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    |&gt; Enum.drop(1) # drop the mythical line 0
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 96</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    |&gt; Enum.map(fn({_l, count}) -&gt; count end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 97</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 98</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 99</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 100</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec cover_per_mod(symbol) :: [lines]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 101</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.cover_per_mod.1"></a>
+    
+    <pre class="irrelevant">  def cover_per_mod(mod) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 102</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    ## cover is [{{mod, line}, count}]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 103</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    {:ok, cover} = :cover.analyse(mod, :calls, :line)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 104</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    cover |&gt; Enum.map(fn({{_m, line}, count}) -&gt; {line, count} end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 105</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 106</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 107</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 108</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec generate_lines([{{symbol, pos_integer}, pos_integer}], line_pairs) :: line_entries
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 109</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  def generate_lines(cover, nil) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 110</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # This seems to be a situation where Macros are used extensively.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 111</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # Does no harm but is annoying.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 112</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    Logger.debug "mod_entry is nil and cover = #{inspect cover}"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 113</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    %{}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 114</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 115</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.generate_lines.2"></a>
+    
+    <pre class="irrelevant">  def generate_lines(cover, mod_entry) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 116</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    lines_cover = cover |&gt; Enum.map(fn({{_mod, line_nr}, count}) -&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 117</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      {line_nr, {count, nil}} end) |&gt; Enum.into(%{})
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 118</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    lines_anchors = mod_entry|&gt; Enum.map(fn({sym, line_nr}) -&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 119</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      {line_nr, {nil, ExCover.Task.module_anchor(sym)}} end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 120</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">    _lines = Dict.merge(lines_cover, lines_anchors, fn(_k, {c, _}, {_, a}) -&gt; {c, a} end)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 121</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 122</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 123</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 124</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  Returns all modules and functions together with their start lines as they definend
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 125</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  in the given quoted code
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 126</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  """
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 127</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec find_all_mods_and_funs(any) :: modules
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 128</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.find_all_mods_and_funs.1"></a>
+    
+    <pre class="irrelevant">  def find_all_mods_and_funs(qs) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 129</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # Logger.info qs
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 130</td>
+  <td class="num">7</td>
+  <td class="elixir">
+    
+    <pre class="covered">    acc = %{:Elixir =&gt; %{}}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 131</td>
+  <td class="num">7</td>
+  <td class="elixir">
+    
+    <pre class="covered">    do_all_mods([:Elixir], qs, acc)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 132</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 133</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 134</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  # Walks the syntax tree
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 135</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  # First parameter is a reverse list of nested module scopes, i.e.
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 136</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  #    X.Y is encoded as [:Y, :X, :Elixir]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 137</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(mod_reversed, {:defmodule, [line: ln], [{:__aliases__, _, mod_name} | body]}, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 138</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # Logger.debug ("+++ Found module #{inspect mod_name}")
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 139</td>
+  <td class="num">10</td>
+  <td class="elixir">
+    
+    <pre class="covered">    mod_alias = Enum.reverse(mod_name) ++ mod_reversed
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 140</td>
+  <td class="num">10</td>
+  <td class="elixir">
+    
+    <pre class="covered">    mod = alias_to_atom(mod_alias)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 141</td>
+  <td class="num">10</td>
+  <td class="elixir">
+    
+    <pre class="covered">    do_all_mods(mod_alias, body, acc |&gt; Map.put(mod, %{} |&gt; Map.put(mod,ln)))
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 142</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 143</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(mod_reversed, {:defprotocol, [line: ln], [{:__aliases__, _, mod_name} | body]}, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 144</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    Logger.debug "### found defprotocol #{inspect mod_name}"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 145</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    mod_alias = Enum.reverse(mod_name) ++ mod_reversed
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 146</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    mod = alias_to_atom(mod_alias)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 147</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    do_all_mods(mod_alias, body, acc |&gt; Map.put(mod, %{} |&gt; Map.put(mod,ln)))
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 148</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 149</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(_mod_reversed, {:defimpl, [line: ln], [{:__aliases__, _, impl_name},
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 150</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      [for: {:__aliases__, _, mod_name}] | body]}, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 151</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    Logger.debug "### found defimpl #{inspect impl_name} - #{inspect mod_name}"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 152</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # impls are always toplevel modules?!
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 153</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    mod_alias = Enum.reverse(mod_name) ++ Enum.reverse(impl_name) ++ [:Elixir] # mod_reversed
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 154</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    mod = alias_to_atom(mod_alias)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 155</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    do_all_mods(mod_alias, body, acc |&gt; Map.put(mod, %{} |&gt; Map.put(mod,ln)))
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 156</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 157</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(mod_reversed, {:def, [line: ln], [{fun_name, _, nil}, body]}, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 158</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # Logger.debug ("--- Found function #{inspect fun_name}")
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 159</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    m = alias_to_atom(mod_reversed)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 160</td>
+  <td class="num">0</td>
+  <td class="elixir">
+    
+    <pre class="not_covered">    do_all_mods(m, body, acc |&gt; put_in([m, {m, fun_name, 0}], ln))
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 161</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 162</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(mod_reversed, {:def, [line: ln], [{fun_name, _, args}, body]}, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 163</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # Logger.debug ("--- Found function #{inspect fun_name}")
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 164</td>
+  <td class="num">50</td>
+  <td class="elixir">
+    
+    <pre class="covered">    m = alias_to_atom(mod_reversed)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 165</td>
+  <td class="num">50</td>
+  <td class="elixir">
+    
+    <pre class="covered">    do_all_mods(m, body, acc |&gt; put_in([m, {m, fun_name, length(args)}], ln))
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 166</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 167</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(mod_reversed, {:@, [line: ln], [{:derive, _, [{:__aliases__, _, [:Access]}]}]}, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 168</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # derives a new module, where Access is put in front of the module name:
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 169</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # X.Y.Z @derive Access ==&gt; Access.X.Y.Z &lt;&lt;--&gt;&gt; [:Z,:Y,:X,:Access, :Elixir]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 170</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # This requires that we insert :Access before :Elixir in mod_reversed
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 171</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    m = ((mod_reversed |&gt; Enum.take(length(mod_reversed) - 1)) ++ [:Access, :Elixir]) |&gt; alias_to_atom
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 172</td>
+  <td class="num">1</td>
+  <td class="elixir">
+    
+    <pre class="covered">    acc |&gt; Map.put(m, %{} |&gt; Map.put(m, ln))
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 173</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 174</td>
+  <td class="num">28</td>
+  <td class="elixir">
+    
+    <pre class="covered">  defp do_all_mods(m, {:__block__, _, tree}, acc) when is_list(tree), do: do_all_mods(m, tree, acc)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 175</td>
+  <td class="num">62</td>
+  <td class="elixir">
+    
+    <pre class="covered">  defp do_all_mods(m, {:do, tree}, acc), do: do_all_mods(m, tree, acc)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 176</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(_m, t = {_t1, _t2, _t3}, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 177</td>
+  <td class="num">146</td>
+  <td class="elixir">
+    
+    <pre class="covered">    Logger.debug "#### Found triple #{inspect t}"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 178</td>
+  <td class="num">146</td>
+  <td class="elixir">
+    
+    <pre class="covered">    acc
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 179</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 180</td>
+  <td class="num">102</td>
+  <td class="elixir">
+    
+    <pre class="covered">  defp do_all_mods(_m, [], acc), do: acc
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 181</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(m, [ head | tree], acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 182</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    # basic recursion of the tree
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 183</td>
+  <td class="num">260</td>
+  <td class="elixir">
+    
+    <pre class="covered">    acc1 = do_all_mods(m, head, acc)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 184</td>
+  <td class="num">260</td>
+  <td class="elixir">
+    
+    <pre class="covered">    do_all_mods(m, tree, acc1)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 185</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 186</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  defp do_all_mods(_m, t, acc) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 187</td>
+  <td class="num">18</td>
+  <td class="elixir">
+    
+    <pre class="covered">    Logger.debug "&gt;&gt;&gt; Found tree #{inspect t}"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 188</td>
+  <td class="num">18</td>
+  <td class="elixir">
+    
+    <pre class="covered">    acc
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 189</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 190</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 191</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 192</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc "Returns the aliased module name if there are any dots in its name"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 193</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  def alias_mod(mod) when is_atom(mod) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 194</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    mod |&gt; Atom.to_string|&gt; String.split(".") |&gt;
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 195</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      Enum.drop(1) |&gt; # first element contains "Elixir" which is not needed here!
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 196</td>
+  <td class="num">2</td>
+  <td class="elixir">
+    
+    <pre class="covered">      Enum.map(&amp;String.to_atom/1)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 197</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 198</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 199</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc "Returns the atom module name based on the (reversed) alias list"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 200</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  def alias_to_atom(a) when is_list(a) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 201</td>
+  <td class="num">65</td>
+  <td class="elixir">
+    
+    <pre class="covered">    a |&gt; Enum.reverse |&gt; Enum.map_join(".", &amp;Atom.to_string/1) |&gt; String.to_atom
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 202</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 203</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 204</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 205</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @doc "Returns the quoted code and the source of a module"
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 206</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec get_quoted_source(atom) :: {Macro.t, binary}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 207</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.get_quoted_source.1"></a>
+    
+    <pre class="irrelevant">  def get_quoted_source(mod) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 208</td>
+  <td class="num">3</td>
+  <td class="elixir">
+    
+    <pre class="covered">    path = get_source_path(mod)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 209</td>
+  <td class="num">3</td>
+  <td class="elixir">
+    
+    <pre class="covered">    {:ok, source} = File.read(path)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 210</td>
+  <td class="num">3</td>
+  <td class="elixir">
+    
+    <pre class="covered">    {:ok, quoted} = Code.string_to_quoted(source)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 211</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    {quoted, source}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 212</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 213</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 214</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 215</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec get_source_path(atom) :: {atom, binary}
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 216</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  def get_source_path(mod) when is_atom(mod) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 217</td>
+  <td class="num">4</td>
+  <td class="elixir">
+    
+    <pre class="covered">    get_compile_info(mod) |&gt; Keyword.get(:source)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 218</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 219</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 220</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  @spec get_compile_info(atom) :: [{atom, term}]
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 221</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+      <a name="#Elixir.ExCover.Source.when.2"></a>
+    
+    <pre class="irrelevant">  def get_compile_info(mod) when is_atom(mod) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 222</td>
+  <td class="num">5</td>
+  <td class="elixir">
+    
+    <pre class="covered">    {^mod, beam, _filename} = :code.get_object_code(mod)
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 223</td>
+  <td class="num">5</td>
+  <td class="elixir">
+    
+    <pre class="covered">    case :beam_lib.chunks(beam, [:compile_info]) do
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 224</td>
+  <td class="num">5</td>
+  <td class="elixir">
+    
+    <pre class="covered">      {:ok, {^mod, [{:compile_info, compile}]}} -&gt; compile
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 225</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">      _ -&gt; []
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 226</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">    end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 227</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">  end
+</pre>
+  </td>
+</tr>
+<tr class="source"><td class="num"> 228</td>
+  <td class="num"></td>
+  <td class="elixir">
+    
+    <pre class="irrelevant">end
+</pre>
+  </td>
+</tr>
+
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
