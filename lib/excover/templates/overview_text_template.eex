@@ -1,4 +1,4 @@
-Coverage Report
+Coverage Reportx
 ---------------
 Ratio  Covered  Uncovered  Module
 <%= for {e, {p, c, u}} <- entries,

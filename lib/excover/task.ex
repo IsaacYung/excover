@@ -1,7 +1,7 @@
 defmodule ExCover.Task do
   require EEx
-
   require Logger
+  alias ExCover.Shell
 
   @type mod_cover :: [{String.t, {integer, integer}}]
   @type fun_cover :: [{mfa, {integer, integer}}]
@@ -29,7 +29,8 @@ defmodule ExCover.Task do
 
     output = opts[:output]
     fn() ->
-      Mix.shell.info "\nGenerating cover results ... "
+      Shell.title("\n  ExCover Results")
+
       Application.ensure_started(:logger)
       Logger.configure(level: Keyword.get(opts, :log, :error))
       File.mkdir_p!(output)

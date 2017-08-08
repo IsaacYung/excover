@@ -35,7 +35,9 @@ defmodule ExCover.Mixfile do
       {:poison, "~> 1.5 or ~> 2.0 or ~> 3.1"},
       {:earmark, "~> 1.2", only: :dev},
       {:ex_doc, "~> 0.16.2", only: :dev},
-      {:dialyze, "~> 0.2.1", only: :dev}
+      {:dialyze, "~> 0.2.1", only: :dev},
+      {:credo, "~> 0.8.4", only: :dev},
+      {:bunt, "~> 0.2.0"}
     ]
   end
 
